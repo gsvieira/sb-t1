@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     }
     
     std::fstream file(argv[2]);
-    preProcessor unprocessed;
+    preProcessor unprocessed(argv[3]);
     
 
     if (file.is_open())
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
         }else if (!strcmp(argv[1], "-m"))
         {
             std::cout << "-m"<< std::endl;
-            unprocessed.readfile(file);
+            unprocessed.preProcess(file);
         }
         else if (!strcmp(argv[1], "-o"))
         {
