@@ -4,6 +4,7 @@
 #include<algorithm>
 #include<regex>
 #include"preprocess.h"
+#include"tables.h"
 
 //contructor
 preProcessor::preProcessor() 
@@ -18,10 +19,16 @@ preProcessor::preProcessor(std::string filename)
 
 void preProcessor::preProcess(std::fstream& inputfile)//, std::vector<std::string> inputVector)
 {
+    tables table;
     readfile(inputfile);
     removeRlines();
     organizeConst(vec);
     writefile(vec);
+    if (flag == "-m")
+    {
+        expandMacro();
+    }
+    
 }
 
 void preProcessor::readfile(std::fstream& inputfile)
@@ -105,6 +112,42 @@ void preProcessor::removeRlines()
         
     }
     vec = result;
+}
+
+void preProcessor::expandMacro()
+{
+    bool endmnotfound = true;
+    for (auto it = vec.begin(); it != vec.end(); it++)
+    {
+        if ((*it).find("MACRO")!= std::string::npos)
+        {
+            auto index = it;
+            auto errorindex = index - vec.end();
+            //TODO: acrecentar na tabela de simbolos
+
+        
+            while (endmnotfound)
+            {
+                if (index != vec.end())
+                {
+                    std::cout << "Erro na linha " << errorindex << ": Não foi encontrado ENDMACRO";
+                }
+                else if ((*index).find("ENDMACRO")!=std::string::npos)
+                {
+                    endmnotfound = false;
+                }
+                table.MacrosTable.puch_back(*index);
+                
+
+
+                index++;
+            }
+            
+            
+        }
+        
+    }
+    
 }
 
 

@@ -4,6 +4,7 @@
 #include<string.h>
 #include<string>
 #include"preprocess.h"
+#include"tables.h"
 
 int main(int argc, char* argv[])
 {
@@ -14,7 +15,12 @@ int main(int argc, char* argv[])
     
     std::fstream file(argv[2]);
     preProcessor unprocessed(argv[3]);
+    std::unordered_map<std::string, instruction> Itable;
+    std::vector<std::string> MDT;
+    readItablefromfile("tabelaintrucao.txt", Itable);
+
     
+    std::cout << b.opcode << std::endl;
 
     if (file.is_open())
     {
@@ -25,7 +31,9 @@ int main(int argc, char* argv[])
         }else if (!strcmp(argv[1], "-m"))
         {
             std::cout << "-m"<< std::endl;
-            unprocessed.preProcess(file);
+            
+            
+            //unprocessed.preProcess(file);
         }
         else if (!strcmp(argv[1], "-o"))
         {
@@ -36,11 +44,47 @@ int main(int argc, char* argv[])
             std::cout << "flag invalida!"<< std::endl;
         }
         
-    }
-    else
+    } else
     {
         std::cout << "Não foi possivel abrir o arquivo" << std::endl;
     }
 
+
+}
+
+void readItablefromfile(std::string ifilename, std::unordered_map<std::string, instruction>& table)
+{
+    std::fstream ifile(ifilename);
+    std::string line;
+    std::vector<std::string> token;
+    size_t pos;
+
+    if (ifile.is_open())
+    {
+        while (!ifile.eof())
+        {
+            getline(ifile, line);
+            for(int i = 0; i < 4;i++)
+            {
+            pos = line.find(",");
+            token.push_back(line.substr(0, pos));
+            line.erase(0, pos+1);
+            }
+            //std::cout << token[0] << token[1] << token[2] << token[3] << std::endl;
+            //std::cout << (*it).data()<< std::endl;
+            for (auto it = token.begin(); it != token.end(); it=it+4)
+            {
+            table[*it]=instruction(*(it+1), *(it+2), *(it+3));    
+            }
+            
+            
+        }
+        
+        
+    }
+    else
+    {
+        std::cout << "tabelainstruções.txt não pode ser aberto" << std::endl;
+    }
 
 }

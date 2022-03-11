@@ -1,13 +1,12 @@
 #pragma once
 
-#include"tabelas.h"
 #include<unordered_map>
 #include<string>
 
-struct ti
+/* struct ti
 {
-    std::string opcode, size, opcount;
-    ti(std::string a, std::string b, std::string c);
+    std::string  size, opcount;
+    ti(std::string b, std::string c);
 };
 
 
@@ -21,5 +20,5 @@ struct td
     std::string size, opcount;
 };
 
-
+ */
 

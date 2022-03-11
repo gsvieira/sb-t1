@@ -9,6 +9,7 @@ class preProcessor
     std::string removeFormat(std::string);
     void printvec(std::vector<std::string>);
     void removeRlines();
+    void expandMacro();
     public:
     preProcessor();
     preProcessor(std::string);
