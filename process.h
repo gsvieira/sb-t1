@@ -11,7 +11,8 @@ private:
     std::string flag, ofilename;
     tables table;
 public:
-    void firstpass(std::fstream&, std::unordered_map<std::string, instruction>);
+    void firstpass(std::fstream&, std::unordered_map<std::string, instruction>&);
+    void secondpass(std::fstream&, std::unordered_map<std::string, instruction>&);
     void readfile(std::fstream&);
     process(/* args */);
     ~process();

@@ -19,6 +19,7 @@ int main(int argc, char* argv[])
     std::unordered_map<std::string, instruction> Itable;
     std::vector<std::string> MDT;
     readItablefromfile("tabelaintrucao.txt", Itable);
+    process preprocessed;
 
     
     // std::cout << b.opcode << std::endl;
@@ -32,7 +33,7 @@ int main(int argc, char* argv[])
         else if (!strcmp(argv[1], "-o"))
         {
             std::cout << "-o"<< std::endl;
-
+            preprocessed.firstpass(file, Itable);
         }
         else
         {
