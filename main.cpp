@@ -5,6 +5,7 @@
 #include<string>
 #include"preprocess.h"
 #include"tables.h"
+#include"process.h"
 
 int main(int argc, char* argv[])
 {
@@ -14,30 +15,24 @@ int main(int argc, char* argv[])
     }
     
     std::fstream file(argv[2]);
-    preProcessor unprocessed(argv[3]);
+    preProcessor unprocessed(argv[1], argv[3]);
     std::unordered_map<std::string, instruction> Itable;
     std::vector<std::string> MDT;
     readItablefromfile("tabelaintrucao.txt", Itable);
 
     
-    std::cout << b.opcode << std::endl;
+    // std::cout << b.opcode << std::endl;
 
     if (file.is_open())
     {
-        if (!strcmp(argv[1], "-p"))
+        if (!strcmp(argv[1], "-m")||!strcmp(argv[1], "-p"))
         {
-            std::cout << "-p"<< std::endl;
-        
-        }else if (!strcmp(argv[1], "-m"))
-        {
-            std::cout << "-m"<< std::endl;
-            
-            
-            //unprocessed.preProcess(file);
+            unprocessed.preProcess(file);
         }
         else if (!strcmp(argv[1], "-o"))
         {
             std::cout << "-o"<< std::endl;
+
         }
         else
         {
@@ -86,5 +81,13 @@ void readItablefromfile(std::string ifilename, std::unordered_map<std::string, i
     {
         std::cout << "tabelainstruções.txt não pode ser aberto" << std::endl;
     }
+
+}
+
+
+
+
+void process ()
+{
 
 }

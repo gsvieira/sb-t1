@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include<vector>
 #include<unordered_map>
@@ -12,14 +13,21 @@ struct instruction
     ~instruction();
     
 };
+struct equ
+{
+    std::string symbol;
+    bool used;
+    equ(std::string, bool);
+};
 
 class tables
 {
 private:
 
 public:
-    std::unordered_map<std::string, std::string> SymbolTable
+    std::unordered_map<std::string, std::string> SymbolTable;
     std::vector<std::string> MacrosTable;
+
     tables();
 };
 

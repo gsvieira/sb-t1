@@ -15,6 +15,16 @@ instruction::~instruction()
 {
 }
 
-tables::tables();
+tables::tables()
 {
 }
+
+equ::equ(std::string a, bool b)
+{
+symbol = a;
+used = b;
+}
+/* auto tables::addequ(std::string a,std::string b, bool c)
+{
+    this->EquTable[a] = equ(b,c);
+} */
